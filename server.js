@@ -22,7 +22,6 @@ app.use('/api/user', userRoutes);
 mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
-  require('dotenv').config();
 }).then(() => {
   console.log('MongoDB connected successfully');
 }).catch((err) => {
