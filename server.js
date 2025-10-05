@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const MONGO_URI = process.env.MONGO_URI;
 const userRoutes = require('./routes/user'); // ✅ Import routes at the top
 
 const app = express();
@@ -18,7 +19,7 @@ app.get('/', (req, res) => {
 app.use('/api/user', userRoutes);
 
 // ✅ MongoDB Connection
-mongoose.connect(process.env.MONGO_URI, {
+mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => {
