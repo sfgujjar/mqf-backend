@@ -3,8 +3,8 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
-const userRoutes = require('./routes/user'); // ✅ Import routes at the top
-const testRoute = require('./routes/test');
+const userRoutes = require('./routes/user.js'); // ✅ Import routes at the top
+const testRoute = require('./routes/test.js');
 app.use('/', testRoute);
 });
 
