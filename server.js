@@ -2,7 +2,7 @@ require('dotenv').config(); // Top of server.js
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-console.log("Mongo URI:", process.env.MONGO_URI);
+console.log("Mongo URI:",process.env.MONGO_URI);
 const userRoutes = require('./routes/user'); // ✅ Import routes at the top
 
 const app = express();
