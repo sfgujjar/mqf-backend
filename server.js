@@ -5,9 +5,10 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/user.js'); // ✅ Import routes at the top
 const testRoute = require('./routes/test.js');
-app.use('/', testRoute);
-});
-
+app.use('/test', testRoute); // ✅ Better route
+app.get('/', (req, res) => {
+  res.send('MQF backend is running ✅');
+}); // ✅ Only one closing bracket
 
 // ✅ Middleware
 app.use(cors());
