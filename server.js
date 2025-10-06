@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/user'); // ✅ Import routes at the top
+const express = require('express');
 const app = express();
 const testRoute = require('./routes/test');
 app.use('/', testRoute);
@@ -20,10 +21,12 @@ app.get('/', (req, res) => {
 app.use('/api/user', userRoutes);
 
 // ✅ MongoDB Connection
-mongoose.connect(MONGO_URI, {
+console.log("Mongo URI:", process.env.MONGO_URI);
+mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
-}).then(() => {
+})
+  .then(() => {
   console.log('MongoDB connected successfully');
 }).catch((err) => {
   console.error('MongoDB connection error:', err);
