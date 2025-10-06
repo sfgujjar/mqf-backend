@@ -6,6 +6,10 @@ const mongoose = require('mongoose');
 const userRoutes = require('./routes/user'); // ✅ Import routes at the top
 const testRoute = require('./routes/test');
 app.use('/', testRoute);
+app.get('/', (req, res) => {
+  res.send('MQF backend is running ✅');
+});
+
 
 // ✅ Middleware
 app.use(cors());
