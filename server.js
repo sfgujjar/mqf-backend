@@ -3,8 +3,9 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/user'); // ✅ Import routes at the top
-
 const app = express();
+const testRoute = require('./routes/test');
+app.use('/', testRoute);
 
 // ✅ Middleware
 app.use(cors());
