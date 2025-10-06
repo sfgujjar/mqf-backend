@@ -1,10 +1,9 @@
 require('dotenv').config(); // Top of server.js
 const express = require('express');
+const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/user'); // ✅ Import routes at the top
-const express = require('express');
-const app = express();
 const testRoute = require('./routes/test');
 app.use('/', testRoute);
 
