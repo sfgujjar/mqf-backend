@@ -2,8 +2,8 @@ require('dotenv').config(); // Top of server.js
 const express = require('express');
 const app = express();
 const cors = require('cors');
+app.use(cors());
 const mongoose = require('mongoose');
-
 const userRoutes = require('./routes/user.js'); // ✅ Import routes at the top
 const testRoute = require('./routes/test.js');
 app.use('/test', testRoute); // ✅ Better route
@@ -12,7 +12,6 @@ app.get('/', (req, res) => {
 }); // ✅ Only one closing bracket
 
 // ✅ Middleware
-app.use(cors());
 app.use(express.json());
 
 // ✅ Test Route
