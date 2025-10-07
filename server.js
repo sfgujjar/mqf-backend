@@ -25,7 +25,6 @@ app.use('/api/user', userRoutes);
 
 // ✅ MongoDB Connection
 console.log("Mongo URI:", process.env.MONGO_URI);
-})
   .then(() => {
   console.log('MongoDB connected successfully');
 }).catch((err) => {
