@@ -4,7 +4,8 @@ const bcrypt = require('bcrypt');
 // ✅ SIGNUP FUNCTION
 const signup = async (req, res) => {
   try {
-    const { name, username, whatsapp, gmail, password, confirmPassword, referralCode } = req.body;
+    console.log("Singup request body:", req.body);
+    const { name, username, whatsapp, email, password, confirmPassword, referralCode } = req.body;
 
     // 🔍 Validation
     if (!name || !username || !whatsapp || !gmail || !password || !confirmPassword) {
@@ -74,6 +75,7 @@ const signup = async (req, res) => {
 // ✅ LOGIN FUNCTION
 const login = async (req, res) => {
   try {
+    console.log("login request body:", req.body);
     const { username, password } = req.body;
 
     if (!username || !password) {
