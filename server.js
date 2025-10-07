@@ -14,11 +14,6 @@ app.get('/', (req, res) => {
 // ✅ Middleware
 app.use(express.json());
 
-// ✅ Test Route
-app.get('/', (req, res) => {
-  res.send('MQF backend is running ✅');
-});
-
 // ✅ API Routes
 app.use('/api/user', userRoutes);
 
