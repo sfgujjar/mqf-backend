@@ -4,11 +4,12 @@ const bcrypt = require('bcrypt');
 // ✅ SIGNUP FUNCTION
 const signup = async (req, res) => {
   try {
-    console.log("Singup request body:", req.body);
+    console.log("Signup request body:", req.body);
+
     const { name, username, whatsapp, email, password, confirmPassword, referralCode } = req.body;
 
     // 🔍 Validation
-    if (!name || !username || !whatsapp || !gmail || !password || !confirmPassword) {
+    if (!name || !username || !whatsapp || !email || !password || !confirmPassword) {
       return res.status(400).json({ success: false, message: 'Please fill all required fields' });
     }
 
@@ -18,13 +19,19 @@ const signup = async (req, res) => {
 
     // 🔍 Duplicate checks
     const existingUsername = await User.findOne({ username });
-    if (existingUsername) return res.status(400).json({ success: false, message: 'Username already taken' });
+    if (existingUsername) {
+      return res.status(400).json({ success: false, message: 'Username already taken' });
+    }
 
     const existingWhatsapp = await User.findOne({ whatsapp });
-    if (existingWhatsapp) return res.status(400).json({ success: false, message: 'WhatsApp number already used' });
+    if (existingWhatsapp) {
+      return res.status(400).json({ success: false, message: 'WhatsApp number already used' });
+    }
 
-    const existingGmail = await User.findOne({ gmail });
-    if (existingGmail) return res.status(400).json({ success: false, message: 'Gmail already registered' });
+    const existingEmail = await User.findOne({ email });
+    if (existingEmail) {
+      return res.status(400).json({ success: false, message: 'Email already registered' });
+    }
 
     // 🔗 Referral chain logic
     let referralChain = [];
@@ -45,7 +52,7 @@ const signup = async (req, res) => {
       name,
       username,
       whatsapp,
-      gmail,
+      email,
       password: hashedPassword,
       referralCode: referralCode || null,
       referralChain,
@@ -75,7 +82,8 @@ const signup = async (req, res) => {
 // ✅ LOGIN FUNCTION
 const login = async (req, res) => {
   try {
-    console.log("login request body:", req.body);
+    console.log("Login request body:", req.body);
+
     const { username, password } = req.body;
 
     if (!username || !password) {
@@ -97,7 +105,7 @@ const login = async (req, res) => {
       message: 'Login successful',
       data: {
         username: user.username,
-        gmail: user.gmail,
+        email: user.email,
         whatsapp: user.whatsapp,
         referralChain: user.referralChain
       }
@@ -114,7 +122,9 @@ const getDashboard = async (req, res) => {
     const { username } = req.params;
 
     const user = await User.findOne({ username });
-    if (!user) return res.status(404).json({ success: false, message: 'User not found' });
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'User not found' });
+    }
 
     let chainCounts = [0, 0, 0, 0, 0];
     const allUsers = await User.find({ referralChain: username });
@@ -148,3 +158,4 @@ const getDashboard = async (req, res) => {
 };
 
 module.exports = { signup, login, getDashboard };
+
